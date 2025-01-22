@@ -1,0 +1,71 @@
+
+
+<div class="fmcenter">
+    <form [formGroup]="myForm" >
+        <div class="reg">
+           Register
+        </div>
+        <div class="signup">
+            <div >
+            <input type="text" placeholder="Enter the name"  class="nam"  formControlName="name">
+            <div>
+                @if (myForm.controls['name'].errors?.['required'] && myForm.controls['name'].touched) {
+                    <span>Name is required</span>
+                }@else if (myForm.controls['name'].errors?.['minlength']) {
+                    <span>Name must be at least 3 characters</span>
+                }@else if (myForm.controls['name'].errors?.['pattern']) {
+                    <span>Name must contain only letters</span>
+                }
+            </div>
+        </div>
+        <div>
+            <input type="email" placeholder="Enter the email" class="email" formControlName="email">
+            <div>
+                @if (myForm.controls['email'].errors?.['required'] && myForm.controls['email'].touched) {
+                    <span>Email is required</span>
+                }@else if (myForm.controls['email'].errors?.['email']) {
+                    <span>Invalid email format</span>
+                }
+            </div>
+        </div>
+        <div>
+           
+            <input type="number" placeholder="Enter the phone number" class="phone" formControlName="phone">
+            <div>
+                @if (myForm.controls['phone'].errors?.['required'] && myForm.controls['phone'].touched) {
+                    <span>Phone number is required</span>
+                }@else if (myForm.controls['phone'].errors?.['pattern']) {
+                    <span>Phone number must be 10 digits</span>
+                }
+            </div>
+        </div>
+        <div>
+            
+            <input type="password" placeholder="Enter the password" class="pass" formControlName="password">
+            <div>
+                @if (myForm.controls['password'].errors?.['required'] && myForm.controls['password'].touched) {
+                    <span>Password is required</span>
+                }@else if (myForm.controls['password'].errors?.['minlength']) {
+                    <span>Password must be at least 8 characters</span>
+                }@else if (myForm.controls['password'].errors?.['pattern']) {
+                    <span>Password must contain at least one uppercase letter, one lowercase letter, and one number</span>
+                }
+            </div>
+        </div>
+        <div>
+            <input type="password" placeholder=" Re Enter the Password" class="pass1" formControlName="password">
+            <div>
+                @if (myForm.controls['password1'].errors?.['required'] && myForm.controls['password1'].touched) {
+                    <span>Re-Password is required</span>
+                }@else if (myForm.controls['password1'].errors?.['passwordsDoNotMatch']) {
+                    <span>Passwords do not match</span>
+                }
+            </div>
+        </div>
+        <div>
+            <button class="submit" (click)="submitreg()" routerLink="/login">Submit</button>
+        </div>
+        
+    </div>
+</form>
+</div>
