@@ -13,11 +13,22 @@ myForm: FormGroup;
 
 constructor() {
   this.myForm = new FormGroup({
-    name: new FormControl('',Validators.required),
+    name: new FormControl('',[Validators.required,Validators.pattern(/^[a-zA-Z]+$/)]),
     password: new FormControl('',Validators.required)
   });
 }
 clicklog(){
-  alert("works"); 
+ this.logcred=this.myForm.value;
+ debugger;
+
 }
+
+logcred:any={
+  name:'',
+  password:''
+
+};
+
+
+
 }
