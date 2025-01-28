@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { SignupCred } from './signup';
 
 @Component({
   selector: 'app-signup',
@@ -34,20 +35,41 @@ constructor() {
       ]),
       password1: new FormControl('', [Validators.required])
     },
-    //  { Validators: this.passMatch.bind(this) } // Correct placement of the custom validator
+    {validators: this.passMatch} // Apply the custom validator here
   );
 }
 
 // Custom validator to check if passwords match
-passMatch(formGroup: FormGroup) {
+passMatch(control: AbstractControl) {
+  const formGroup = control as FormGroup;
   const password = formGroup.get('password')?.value;
   const password1 = formGroup.get('password1')?.value;
-  return password === password1 ? null : { passwordsDoNotMatch:true }; // Return an error object if passwords do not match
+  return password === password1 ? null : { passwordsDoNotMatch: true };
 }
 submitreg(){
+  this.userinfo1=this.myForm.value;
+  localStorage.setItem('name',this.userinfo1.name);
+  localStorage.setItem('email',this.userinfo1.email);
+  localStorage.setItem('phone',this.userinfo1.phone);
+  localStorage.setItem('password',this.userinfo1.password);
+  localStorage.setItem('password1',this.userinfo1.password1);
   debugger;
-  alert("submitted Successfully:");
+  if(this.userinfo1.name==="admin" &&  this.userinfo1.password==="123"){
+    alert("registration Success");
+  }
+  
 }
+
+
+userinfo1: SignupCred = {
+  name: '',
+  email: '',
+  phone: '',
+  password: '',
+  password1: ''
+};
+
+
 
 }
 
